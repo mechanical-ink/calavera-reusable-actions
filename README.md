@@ -4,7 +4,7 @@ A selection of reusable GitHub Actions
 
 ## auto-merge
 
-The `auto-merge` reusable action is located in `.github/workflows/auto-merge.yml`. To use it you will need a [Personal Access Token](https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token) named `GH_TOKEN` with the following scopes defined in the repository that will call this action:
+The `auto-merge` reusable action is located in `.github/workflows/auto-merge.yml`. To use it you will need a [Personal Access Token](https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token) with the following scopes:
 
 - `repo` for private repositories
 - `public_repo` for public repositories
