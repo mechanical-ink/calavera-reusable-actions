@@ -29,8 +29,8 @@ jobs:
         node-version: ${{ env.NODE_VERSION }}
     - name: Install the vsce npm package
       run: |
-        yarn install
-        yarn install -g vsce
+        yarn
+        yarn add global vsce
     - name: Package the extension pack
       run: |
         vsce package
