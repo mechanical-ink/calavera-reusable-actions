@@ -40,11 +40,7 @@ In the repository that will call this action, you need to [define a secret](http
 This reusable action depends on the following actions:
 
 - [checkout](https://github.com/marketplace/actions/checkout)
-- [actions/setup-node](https://github.com/marketplace/actions/setup-node-js-environment)
-
-It will also install:
-
-- [vcse](https://www.npmjs.com/package/vsce)
+- [lannonbr/vsce-action](https://github.com/marketplace/actions/github-action-for-vsce)
 
 ### Usage
 
@@ -60,24 +56,6 @@ on:
 jobs:
   publish-vscode-extension:
     uses:  project-calavera/calavera-reusable-actions/.github/workflows/publish-vscode-extension.yml@main
-    secrets:
-      VSCODE_MARKETPLACE_TOKEN: ${{ secrets.VSCODE_MARKETPLACE_TOKEN }}
-```
-
-The default version of Node.js used is 14.x. If you need a difference version, you can specify it as follows:
-
-```yml
-name: publish-vscode-extension
-on:
-  push:
-    branches:
-      - main
-
-jobs:
-  publish-vscode-extension:
-    uses:  project-calavera/calavera-reusable-actions/.github/workflows/publish-vscode-extension.yml@main
-    with:
-      node-version: 12
     secrets:
       VSCODE_MARKETPLACE_TOKEN: ${{ secrets.VSCODE_MARKETPLACE_TOKEN }}
 ```

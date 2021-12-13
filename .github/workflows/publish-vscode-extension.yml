@@ -2,36 +2,18 @@ name: publish-vscode-extension
 
 on: 
   workflow_call:
-    inputs:
-      node-version:
-        description: The Nodejs version to use
-        default: 14
-        required: false
-        type: number
     secrets:
       VSCODE_MARKETPLACE_TOKEN:
         description: 'Personal access token from the VSCode marketplace'
         required: true
 
-env:
-  NODE_VERSION: ${{ inputs.node-version }}
-
 jobs:
   publish:
     runs-on: ubuntu-latest
-
     steps:
-    - name: 'Checkout GitHub Action'
-      uses: actions/checkout@v2
-    - name: Setup Node ${{ env.NODE_VERSION }} Environment
-      uses: actions/setup-node@v2
-      with:
-        node-version: ${{ env.NODE_VERSION }}
-    - name: Install the vsce npm package
-      run: |
-        yarn
-        yarn add global vsce
-    - name: Package the extension pack
-      run: |
-        vsce package
-        vsce publish -p ${{ secrets.VSCODE_MARKETPLACE_TOKEN }}
+      - uses: actions/checkout@v2
+      - uses: lannonbr/vsce-action@3.0.0
+        with:
+          args: "publish -p $VSCODE_MARKETPLACE_TOKEN"
+        env:
+          VSCODE_MARKETPLACE_TOKEN: ${{ secrets.VSCODE_MARKETPLACE_TOKEN }}
