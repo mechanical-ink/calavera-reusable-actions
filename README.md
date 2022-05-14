@@ -132,59 +132,59 @@ This reusable action depends on the following actions:
 - [checkout](https://github.com/marketplace/actions/checkout)
 - [actions/setup-node](https://github.com/actions/setup-node)
 
-## Inputs
+### Inputs
 
 The action has the following inputs:
 
-### release-type
+#### release-type
 
 This is can be one of the release types as [detailed in the release please docs](https://github.com/googleapis/release-please#release-types-supported).
 
 - This `input` is optional with a default of `node`
 
-### node-version
+#### node-version
 
 The version of Node.js to use for the release. This action supports all [active and maintenance releases](https://nodejs.org/en/about/releases/) of Node.js.
 
 - This `input` is optional with a default of `12`
 
-### npm-publish
+#### npm-publish
 
 Whether to publish the package to the NPM registry.
 
 - This `input` is optional with a default of `true`
 
-### npm-publish-args
+#### npm-publish-args
 
 Arguments to pass to the `npm publish` command. This is ignored if `npm-publish` is set to `false`.
 
 - This `input` is optional with a default of an empty string
 
-### registry-url
+#### registry-url
 
 The registry to publish to.
 
 - This `input` is optional with a default of `https://registry.npmjs.org`
 
-## Secrets
+### Secrets
 
 This action requires the following secrets to be passed by the caller. Both of these need to be set as [environmental secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets#creating-encrypted-secrets-for-a-repository) using the calling repositories settings.
 
-### GH_TOKEN
+#### GH_TOKEN
 
 Personal access token passed from the caller workflow. Read the documentation on [creating a PA token](https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token).
 
-### NPM_AUTH_TOKEN
+#### NPM_AUTH_TOKEN
 
 Authentication token for the NPM registry. Read the documentation for details on [creating a token](https://docs.npmjs.com/creating-and-viewing-access-tokens).
 
 > NOTE: When skipping NPM publishing, this token is not required.
 
-## Usage
+### Usage
 
 In the repository that will call this action, you will need to add a `.github/workflows/publish-release.yml` file with the following content:
 
-### With defaults
+#### With defaults
 
 ```yml
 name: publish-release
@@ -196,13 +196,13 @@ on:
 
 jobs:
   publish-release:
-    uses: mdn/workflows/.github/workflows/publish-release.yml@main
+    uses: project-calavera/calavera-reusable-actions/.github/workflows/publish-release.yml@main
     secrets:
       GH_TOKEN: ${{ secrets.GH_TOKEN }}
       NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
 ```
 
-### Overriding some defaults
+#### Overriding some defaults
 
 ```yml
 name: publish-release
@@ -214,7 +214,7 @@ on:
 
 jobs:
   publish-release:
-    uses: mdn/workflows/.github/workflows/publish-release.yml@main
+    uses: project-calavera/calavera-reusable-actions/.github/workflows/publish-release.yml@main
     with:
       release-type: python
     secrets:
@@ -222,7 +222,7 @@ jobs:
       NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
 ```
 
-### Skip NPM publishing
+#### Skip NPM publishing
 
 ```yml
 name: publish-release
@@ -234,7 +234,7 @@ on:
 
 jobs:
   publish-release:
-    uses: mdn/workflows/.github/workflows/publish-release.yml@main
+    uses: project-calavera/calavera-reusable-actions/.github/workflows/publish-release.yml@main
     with:
       npm-publish: false
     secrets:
