@@ -26,7 +26,7 @@ on: [pull_request_target]
 
 jobs:
   auto-merge:
-    uses:  project-calavera/calavera-reusable-actions/.github/workflows/auto-merge.yml@main
+    uses: project-calavera/calavera-reusable-actions/.github/workflows/auto-merge.yml@main
     secrets:
       GH_TOKEN: ${{ secrets.GH_TOKEN }}
 ```
@@ -55,7 +55,7 @@ on:
 
 jobs:
   publish-vscode-extension:
-    uses:  project-calavera/calavera-reusable-actions/.github/workflows/publish-vscode-extension.yml@main
+    uses: project-calavera/calavera-reusable-actions/.github/workflows/publish-vscode-extension.yml@main
     secrets:
       VSCODE_MARKETPLACE_TOKEN: ${{ secrets.VSCODE_MARKETPLACE_TOKEN }}
 ```
@@ -75,8 +75,16 @@ In the repository that will call this action, you will need to create the follow
 
 ```json
 [
-  {"name": "bug", "color": "#d73a4a", "description": "something isn’t working" },
-  {"name": "chore", "color": "#fef2c0", "description": "keeping the lights on" }
+  {
+    "name": "bug",
+    "color": "#d73a4a",
+    "description": "something isn’t working"
+  },
+  {
+    "name": "chore",
+    "color": "#fef2c0",
+    "description": "keeping the lights on"
+  }
 ]
 ```
 
@@ -88,7 +96,7 @@ on: [workflow_dispatch]
 
 jobs:
   set-default-labels:
-    uses:  project-calavera/calavera-reusable-actions/.github/workflows/set-default-labels.yml@main
+    uses: project-calavera/calavera-reusable-actions/.github/workflows/set-default-labels.yml@main
 ```
 
 ### Inputs
@@ -105,7 +113,7 @@ on: [workflow_dispatch]
 
 jobs:
   set-default-labels:
-    uses:  project-calavera/calavera-reusable-actions/.github/workflows/set-default-labels.yml@main
+    uses: project-calavera/calavera-reusable-actions/.github/workflows/set-default-labels.yml@main
     with:
       should-delete-labels: true
 ```
@@ -127,6 +135,7 @@ This reusable action depends on the following actions:
 ## Inputs
 
 The action has the following inputs:
+
 ### release-type
 
 This is can be one of the release types as [detailed in the release please docs](https://github.com/googleapis/release-please#release-types-supported).
@@ -137,7 +146,19 @@ This is can be one of the release types as [detailed in the release please docs]
 
 The version of Node.js to use for the release. This action supports all [active and maintenance releases](https://nodejs.org/en/about/releases/) of Node.js.
 
-- This `input` is optional with a default of `16`
+- This `input` is optional with a default of `12`
+
+### npm-publish
+
+Whether to publish the package to the NPM registry.
+
+- This `input` is optional with a default of `true`
+
+### npm-publish-args
+
+Arguments to pass to the `npm publish` command. This is ignored if `npm-publish` is set to `false`.
+
+- This `input` is optional with a default of an empty string
 
 ### registry-url
 
@@ -157,6 +178,8 @@ Personal access token passed from the caller workflow. Read the documentation on
 
 Authentication token for the NPM registry. Read the documentation for details on [creating a token](https://docs.npmjs.com/creating-and-viewing-access-tokens).
 
+> NOTE: When skipping NPM publishing, this token is not required.
+
 ## Usage
 
 In the repository that will call this action, you will need to add a `.github/workflows/publish-release.yml` file with the following content:
@@ -173,7 +196,7 @@ on:
 
 jobs:
   publish-release:
-    uses:  project-calavera/calavera-reusable-actions/.github/workflows/publish-release.yml@main
+    uses: mdn/workflows/.github/workflows/publish-release.yml@main
     secrets:
       GH_TOKEN: ${{ secrets.GH_TOKEN }}
       NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
@@ -191,10 +214,29 @@ on:
 
 jobs:
   publish-release:
-    uses:  project-calavera/calavera-reusable-actions/.github/workflows/publish-release.yml@main
+    uses: mdn/workflows/.github/workflows/publish-release.yml@main
     with:
       release-type: python
     secrets:
       GH_TOKEN: ${{ secrets.GH_TOKEN }}
       NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+```
+
+### Skip NPM publishing
+
+```yml
+name: publish-release
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  publish-release:
+    uses: mdn/workflows/.github/workflows/publish-release.yml@main
+    with:
+      npm-publish: false
+    secrets:
+      GH_TOKEN: ${{ secrets.GH_TOKEN }}
 ```
