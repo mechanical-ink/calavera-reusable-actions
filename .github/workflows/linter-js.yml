@@ -1,0 +1,14 @@
+name: linter-js
+
+on: 
+  workflow_call:
+
+jobs:
+  linter-js:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: github/super-linter/slim@v4
+        env:
+          VALIDATE_ALL_CODEBASE: false
+          VALIDATE_JAVASCRIPT_ES: true
