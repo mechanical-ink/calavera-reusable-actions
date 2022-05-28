@@ -2,6 +2,10 @@ name: linter-js
 
 on: 
   workflow_call:
+    secrets:
+      GITHUB_TOKEN:
+        description: Default GitHub token
+        required: true
 
 jobs:
   linter-js:
@@ -12,3 +16,4 @@ jobs:
         env:
           VALIDATE_ALL_CODEBASE: false
           VALIDATE_JAVASCRIPT_ES: true
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
