@@ -6,7 +6,7 @@ A selection of reusable GitHub Actions
 
 The `auto-merge` reusable action is located in `.github/workflows/auto-merge.yml`.
 
-> NOTE: This ony auto merges pull requests opened by [Dependabot](https://github.com/dependabot).
+> NOTE: This only auto merges pull requests opened by [Dependabot](https://github.com/dependabot).
 
 This reusable action depends on the following actions:
 
@@ -21,7 +21,7 @@ The action has the following inputs:
 
 **target-repo**
 
-Specify the target repository this action should run on. This is used to prevent actions from running on repositories other than the target repository. For example, specifying a target-repo of schalkneethling/web-accessibility will prevent the workflow from running on forks.
+Specify the target repository this action should run on. This is used to prevent actions from running on repositories other than the target repository. For example, specifying a target-repo of `schalkneethling/web-accessibility` will prevent the workflow from running on forks of `schalkneethling/web-accessibility`.
 
 - This input is required
 
@@ -31,7 +31,7 @@ This action requires the following secret to be passed by the caller. It needs t
 
 **GH_TOKEN**
 
-To use it you will need a [Personal Access Token](https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token) with the following scopes:
+You will need a [Personal Access Token](https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token) with the following scopes:
 
 - `repo` for private repositories
 - `public_repo` for public repositories
