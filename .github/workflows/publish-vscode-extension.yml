@@ -1,14 +1,20 @@
 name: publish-vscode-extension
 
-on: 
+on:
   workflow_call:
+    inputs:
+      target-repo:
+        description: The repo to run this action on. This is to prevent actions from running on forks unless intended.
+        required: true
+        type: string
     secrets:
       VSCODE_MARKETPLACE_TOKEN:
-        description: 'Personal access token from the VSCode marketplace'
+        description: "Personal access token from the VSCode marketplace"
         required: true
 
 jobs:
   publish:
+    if: github.repository == inputs.target-repo
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
