@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: ahmadnassri/action-dependabot-auto-merge@70c9f0a176a7f7bf7c526d0da1d37d6c21e65329  # v2, as of 2021-11-26
+      - uses: ahmadnassri/action-dependabot-auto-merge@7dbc44641f77fb62b23158c1294b5b757d6091a5  # v2, as of 2021-11-26
         with:
           target: minor
           github-token: ${{ secrets.GH_TOKEN }}
