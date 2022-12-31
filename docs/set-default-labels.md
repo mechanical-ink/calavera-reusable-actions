@@ -9,11 +9,7 @@ This reusable action depends on the following actions:
 
 ## Inputs
 
-The action has the following inputs:
-
-### should-delete-labels
-
-This is an optional `boolean` input that is `false` by default. If set to `true`, the action will delete any existing labels that are not listed in the JSON file mentioned previously.
+The action has the following inputs.
 
 ### Required inputs
 
@@ -22,6 +18,10 @@ This is an optional `boolean` input that is `false` by default. If set to `true`
 Specify the target repository this action should run on. This is used to prevent actions from running on repositories other than the target repository. For example, specifying a target-repo of `schalkneethling/schalkneethling.com` will prevent the workflow from running on forks of `schalkneethling/schalkneethling.com`.
 
 - This input is required
+
+### should-delete-labels
+
+This is an optional `boolean` input that is `false` by default. If set to `true`, the action will delete any existing labels that are not listed in the JSON file mentioned previously.
 
 ## Usage
 
