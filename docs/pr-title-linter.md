@@ -49,6 +49,8 @@ Pull request comment to add to pull request if linting failed.
 
 👋🏼 Thank you for opening a pull request and your interest in the project. We require pull request titles to follow the [Conventional Commits specification](https://www.conventionalcommits.org/) and it looks like your proposed title needs to be adjusted.
 
+> Note: The error message will also be output as part of the pull request comment.
+
 ### Usage
 
 In the repository that will call this action, you will need to add a `.github/workflows/pr-title-linter.yml` file with the following content.
