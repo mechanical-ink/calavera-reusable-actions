@@ -47,15 +47,7 @@ Pull request comment to add to pull request if linting failed.
 
 - This input is optional with the following default.
 
-👋🏼 Thank you for opening a pull request and your interest in the project.
-
-We require pull request titles to follow the [Conventional Commits specification](https://www.conventionalcommits.org/) and it looks like your proposed title needs to be adjusted.
-
-Details:
-
-```js
-${{ steps.lint_pr_title.outputs.error_message }}
-```
+👋🏼 Thank you for opening a pull request and your interest in the project. We require pull request titles to follow the [Conventional Commits specification](https://www.conventionalcommits.org/) and it looks like your proposed title needs to be adjusted.
 
 ### Usage
 
@@ -68,6 +60,10 @@ name: pr-title-linter
 
 on:
   pull_request_target:
+    types:
+      - opened
+      - edited
+      - synchronize
     branches:
       - main
 
@@ -89,6 +85,10 @@ name: pr-title-linter
 
 on:
   pull_request_target:
+    types:
+      - opened
+      - edited
+      - synchronize
     branches:
       - main
 
@@ -111,6 +111,10 @@ name: pr-title-linter
 
 on:
   pull_request_target:
+    types:
+      - opened
+      - edited
+      - synchronize
     branches:
       - main
 
@@ -135,6 +139,10 @@ name: pr-title-linter
 
 on:
   pull_request_target:
+    types:
+      - opened
+      - edited
+      - synchronize
     branches:
       - main
 
@@ -153,6 +161,10 @@ name: pr-title-linter
 
 on:
   pull_request_target:
+    types:
+      - opened
+      - edited
+      - synchronize
     branches:
       - main
 
