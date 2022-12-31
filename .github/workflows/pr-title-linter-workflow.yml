@@ -18,7 +18,3 @@ jobs:
     uses: project-calavera/calavera-reusable-actions/.github/workflows/pr-title-linter.yml@main
     with:
       target-repo: "mechanical-ink/calavera-reusable-actions"
-      pr-lint-error-message: |
-        ```
-        ${{ steps.lint_pr_title.outputs.error_message }}
-        ```
