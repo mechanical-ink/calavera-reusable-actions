@@ -6,3 +6,4 @@ A selection of reusable GitHub Actions
 - [publish-vscode-extension](docs/publish-release.md)
 - [set-default-labels](docs/set-default-labels.md)
 - [publish-release](docs/publish-release.md)
+- [pr-title-linter](docs/pr-title-linter.md)
