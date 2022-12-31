@@ -25,15 +25,7 @@ on:
       pr-lint-error-message:
         description: Pull request comment to add to pull request if linting failed.
         default: |
-            👋🏼 Thank you for opening a pull request and your interest in the project.
-
-            We require pull request titles to follow the [Conventional Commits specification](https://www.conventionalcommits.org/) and it looks like your proposed title needs to be adjusted.
-
-            Details:
-            
-            ```
-            ${{ steps.lint_pr_title.outputs.error_message }}
-            ```
+            👋🏼 Thank you for opening a pull request and your interest in the project. We require pull request titles to follow the [Conventional Commits specification](https://www.conventionalcommits.org/) and it looks like your proposed title needs to be adjusted.
         required: false
         type: string
 
