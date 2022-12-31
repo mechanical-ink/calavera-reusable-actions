@@ -53,7 +53,7 @@ jobs:
       - uses: marocchino/sticky-pull-request-comment@v2
         # When the previous steps fails, the workflow would stop. By adding this
         # condition you can continue the execution with the populated error message.
-        if: input.show-error-message && !cancelled() && (steps.lint_pr_title.outputs.error_message != null)
+        if: inputs.show-error-message && !cancelled() && (steps.lint_pr_title.outputs.error_message != null)
         with:
           header: pr-title-lint-error
           message: "${{ inputs.pr-lint-error-message }}"
