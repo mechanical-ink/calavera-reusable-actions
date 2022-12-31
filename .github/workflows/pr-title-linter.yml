@@ -1,0 +1,67 @@
+name: pr-title-linter
+on:
+  workflow_call:
+    inputs:
+      target-repo:
+        description: The repo to run this action on. This is to prevent actions from running on forks unless intended.
+        required: true
+        type: string
+      required-scope:
+        description: |
+          Whether scope is required. For example: fix(ui), In this instance, ui is the scope.
+        default: false
+        required: false
+        type: boolean
+      disallow-scopes:
+        description: Configure which scopes (newline delimited) are disallowed in PR titles.
+        default: ""
+        required: false
+        type: string
+      show-error-message:
+        description: Whether to add a comment to the pull request with the error message.
+        default: true
+        required: false
+        type: boolean
+      pr-lint-error-message:
+        description: Pull request comment to add to pull request if linting failed.
+        default: |
+            👋🏼 Thank you for opening a pull request and your interest in the project.
+
+            We require pull request titles to follow the [Conventional Commits specification](https://www.conventionalcommits.org/) and it looks like your proposed title needs to be adjusted.
+
+            Details:
+            
+            ```
+            ${{ steps.lint_pr_title.outputs.error_message }}
+            ```
+        required: false
+        type: string
+
+
+jobs:
+  pr-title-linter:
+    if: github.repository == inputs.target-repo
+    name: Validate PR title
+    runs-on: ubuntu-latest
+    steps:
+      - uses: amannn/action-semantic-pull-request@v5
+        id: lint_pr_title
+        with:
+          disallowScopes: "${{ inputs.disallow-scopes }}"
+          requireScope: "${{ inputs.required-scope }}"
+
+      - uses: marocchino/sticky-pull-request-comment@v2
+        # When the previous steps fails, the workflow would stop. By adding this
+        # condition you can continue the execution with the populated error message.
+        if: input.show-error-message && !cancelled() && (steps.lint_pr_title.outputs.error_message != null)
+        with:
+          header: pr-title-lint-error
+          message: "${{ input.pr-lint-error-message }}"
+
+      # Delete a previous comment when the issue has been resolved
+      - if: ${{ steps.lint_pr_title.outputs.error_message == null }}
+        uses: marocchino/sticky-pull-request-comment@v2
+        with:   
+          header: pr-title-lint-error
+          delete: true
+        
