@@ -50,7 +50,12 @@ jobs:
         if: inputs.show-error-message && !cancelled() && (steps.lint_pr_title.outputs.error_message != null)
         with:
           header: pr-title-lint-error
-          message: "${{ inputs.pr-lint-error-message }}"
+          message: |
+            "${{ inputs.pr-lint-error-message }}"
+
+            ```
+            ${{ steps.lint_pr_title.outputs.error_message }}
+            ```
 
       # Delete a previous comment when the issue has been resolved
       - if: ${{ steps.lint_pr_title.outputs.error_message == null }}
